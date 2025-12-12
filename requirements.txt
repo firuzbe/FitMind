@@ -1,0 +1,11 @@
+# requirements
+aiogram==3.9.0
+pydantic==2.7.4
+langchain==0.2.11
+langgraph==0.1.16
+langchain-groq
+asyncpg
+python-dotenv
+openpyxl
+APScheduler
+pytz
