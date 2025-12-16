@@ -23,7 +23,8 @@ async def init_db():
             registered_at TIMESTAMP DEFAULT NOW(),
             level_entered_at TIMESTAMP DEFAULT NOW(),
             last_export TIMESTAMP,
-            next_reminder_days TEXT DEFAULT 'mon,wed,fri'
+            next_reminder_days TEXT DEFAULT 'mon,wed,fri',
+            current_plan TEXT  -- ДОБАВЛЕНО
         );
         CREATE TABLE IF NOT EXISTS progress_logs (
             id SERIAL PRIMARY KEY,

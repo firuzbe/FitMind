@@ -1,3 +1,4 @@
+#scheduler.py
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 import pytz
@@ -7,28 +8,28 @@ import os
 TIMEZONE = pytz.timezone(os.getenv("TIMEZONE", "Europe/Moscow"))
 scheduler = AsyncIOScheduler(timezone=TIMEZONE)
 
-# -------------------- Напоминание о тренировке --------------------
+#Напоминание о тренировке
 async def send_training_reminder(bot, user_id: int):
     await bot.send_message(
         user_id,
         "🏋️ **Тренировка сегодня!**\nНе забудьте выполнить вашу сессию. Удачи!"
     )
 
-# -------------------- Напоминание о взвешивании --------------------
+#Напоминание о взвешивании
 async def send_weight_reminder(bot, user_id: int):
     await bot.send_message(
         user_id,
         "⚖️ Пожалуйста, введите ваш вес за сегодня."
     )
 
-# -------------------- Настройка напоминаний пользователя --------------------
+#Настройка напоминаний пользователя
 async def setup_user_reminders(bot, user_id: int, days_str: str, hour: int = 18, minute: int = 0):
     """
     Настройка напоминаний о тренировках на выбранные дни и время.
     days_str: 'mon,wed,fri'
     hour, minute: время напоминания
     """
-    # Удаляем старые задачи пользователя
+    #Удаляем старые задачи пользователя
     for job in scheduler.get_jobs():
         if str(user_id) in job.id:
             scheduler.remove_job(job.id)
